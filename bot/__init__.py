@@ -54,7 +54,7 @@ try:
     if len(SERVER_PORT) == 0:
         raise KeyError
 except:
-    SERVER_PORT = 80
+    SERVER_PORT = environ.get('PORT', 80)
 
 Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{SERVER_PORT}", shell=True)
 srun(["qbittorrent-nox", "-d", "--profile=."])
